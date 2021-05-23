@@ -723,3 +723,26 @@ span.ham-menu-bar3--touch {
 .card-body {
   padding: 1rem;
 }
+
+/* user orders */
+.order-block {
+  border-radius: 10px;
+  border: solid 1px #fff;
+  margin-bottom: 2rem;
+}
+
+.order-id, .order-tex, .order-shipping, .order-total {
+  color: #fff;
+  padding: .5rem;
+  margin: 0;
+}
+
+@media(max-width: 768px)
+{
+  .profile {
+    width: 100%;
+  }
+  .profile-form, .profile-orders {
+    margin: auto;
+  }
+}

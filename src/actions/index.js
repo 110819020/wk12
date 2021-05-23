@@ -32,6 +32,9 @@ import {
   BEGIN_ORDER_DETAIL,
   SUCCESS_ORDER_DETAIL,
   FAIL_ORDER_DETAIL,
+  BEGIN_USER_ORDERS,
+  SUCCESS_USER_ORDERS,
+  FAIL_USER_ORDERS,
 } from "../utils/constants";
 
 import {
@@ -151,7 +154,6 @@ export const loginToFirebase = async (dispatch, userInfo) => {
   dispatch({ type: BEGIN_LOGIN_REQUEST });
   try {
     const user = await signInWithEmailPassword(userInfo.email, userInfo.password);
-    const orders = await getOrderByUser();
     dispatch({
       type: SUCCESS_LOGIN_REQUEST,
       payload: user.user.providerData[0],
@@ -275,4 +277,20 @@ export const checkLogin = (dispatch) => {
     dispatch({ type: LOGOUT_REQUEST });    
   }
   return isLogin;
+}
+
+export const getUserOrders = async (dispatch) => {
+  dispatch({ type: BEGIN_USER_ORDERS });
+  try {
+    const orders = await getOrderByUser();
+    dispatch({ 
+      type: SUCCESS_USER_ORDERS,
+      payload: orders
+    });
+  }catch (error) {
+    dispatch({ 
+      type: FAIL_USER_ORDERS, 
+      payload: error 
+    });
+  }
 }
